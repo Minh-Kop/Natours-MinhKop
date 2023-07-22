@@ -33,7 +33,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
                         //     `https://www.natours.dev/img/tours/${tour.imageCover}`,
                         // ],
                         images: [
-                            `${req.protocol}://${req.get('host')}/${
+                            `${req.protocol}://${req.get('host')}/img/tours/${
                                 tour.imageCover
                             }`,
                         ], // only accepts live images (images hosted on the internet)
