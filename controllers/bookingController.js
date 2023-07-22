@@ -16,7 +16,9 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
         // success_url: `${req.protocol}://${req.get('host')}/?tour=${
         //     req.params.tourId
         // }&user=${req.user.id}&price=${tour.price}`, // user will be redirected to this url when payment is successful. home page
-        success_url: `${req.protocol}://${req.get('host')}/my-tours`,
+        success_url: `${req.protocol}://${req.get(
+            'host'
+        )}/my-tours?alert=booking`,
         cancel_url: `${req.protocol}://${req.get('host')}/tour/${tour.slug}`, // user will be redirected to this url when payment has an issue. tour page (previous page)
         customer_email: req.user.email,
         client_reference_id: req.params.tourId, // this field allows us to pass in some data about this session that we are currently creating.
@@ -65,7 +67,6 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
 const createBookingCheckout = catchAsync(async (session) => {
     const tour = session.client_reference_id;
-    console.log(session.customer_email);
     const user = (await User.findOne({ email: session.customer_email })).id;
     const price = session.amount_total / 100;
     await Booking.create({ tour, user, price });
