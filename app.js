@@ -29,7 +29,6 @@ app.set('views', path.join(__dirname, 'views'));
 // 1) GLOBAL MIDDLEWARES
 // Implement CORS
 app.use(cors());
-app.options('*', cors());
 
 // Access-Control-Allow-Origin *
 // api.natours.com, front-end natours.com
@@ -39,6 +38,7 @@ app.options('*', cors());
 //     })
 // );
 
+app.options('*', cors());
 // app.options('/api/v1/tours/:id', cors());
 
 // Serving static files
